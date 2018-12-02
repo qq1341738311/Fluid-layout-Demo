@@ -11,13 +11,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private EditText ed_text;
-    private Button ed_btn;
     private View_LS_List zdyView;
     private List<String> dataAll = new ArrayList<>();
     private List<String> newDataAll = new ArrayList<>();
+    private View_Title zdyTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +34,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        ed_text = (EditText) findViewById(R.id.ed_text);
-        ed_btn = (Button) findViewById(R.id.ed_btn);
+        zdyTitle = findViewById(R.id.zdyTitle);
         zdyView = (View_LS_List) findViewById(R.id.zdyView);
-        ed_btn.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ed_btn:
-                String trim = ed_text.getText().toString().trim();
+        zdyTitle.setOnClickListeners(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String trim = zdyTitle.setEdText();
                 zdyView.removeChildView();
                 newDataAll.add(trim);
                 zdyView.setData(newDataAll);
                 zdyView.setData(dataAll);
-                break;
-        }
+            }
+        });
     }
 
 }
